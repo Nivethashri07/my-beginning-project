@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Notice Board</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+            margin-top: 20px;
+        }
+
+        .card {
+
+            background: white;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            border-left: 8px solid darkblue;
+
+            border-radius: 10px;
+
+            box-shadow: 0px 2px 8px gray;
+
+        }
+
+        .card h2 {
+
+            color: darkblue;
+
+        }
+
+        .card p {
+
+            font-size: 17px;
+
+            margin: 8px 0;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Community Notice Board</h1>
+
+        <div id="noticeBoard"></div>
+
+    </div>
+
+    <script>
+
+        // Read all events
+        let events = JSON.parse(localStorage.getItem("events")) || [];
+
+        let board = document.getElementById("noticeBoard");
+
+        if (events.length == 0) {
+
+            board.innerHTML = "<h2>No Events Available.</h2>";
+
+        }
+
+        else {
+
+            events.forEach(function (event) {
+
+                board.innerHTML += `
+
+<div class="card">
+
+<h2>${event.category}</h2>
+
+<p><b>Date :</b> ${event.date}</p>
+
+<p><b>Time :</b> ${event.time}</p>
+
+<p><b>Venue :</b> ${event.venue}</p>
+
+<p><b>Description :</b><br>${event.description}</p>
+
+<p><b>Things to Bring :</b><br>${event.things}</p>
+
+<hr>
+
+<h3>Organizer Details</h3>
+
+<p><b>Name :</b> ${event.organizer}</p>
+
+<p><b>Phone :</b> ${event.phone}</p>
+
+<p><b>Email :</b> ${event.email}</p>
+
+</div>
+
+`;
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
